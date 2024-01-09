@@ -1,12 +1,16 @@
 import { expect, $} from '@wdio/globals'
-import LeftSideMenuScreen from "../pageobjects/leftSideMenu.page.js";
-import LoginScreen from "../pageobjects/login.page.js";
-import CatalogScreen from "../pageobjects/secure.page.js";
+import LeftSideMenuPage from "../pageobjects/leftsideMenu.page.js";
+import LoginPage from "../pageobjects/login.page.js";
+import MainPage from "../pageobjects/main.page.js";
 
-describe('My Login application', () => {
+describe('Login Feature', () => {
+    const leftSideMenu = new LeftSideMenuPage;
+    const mainPage = new MainPage();
+    const loginPage = new LoginPage();
+
     beforeEach(async () => {
-        await LeftSideMenuScreen.expandMenuButton.click();
-        await LeftSideMenuScreen.loginButton.click();
+        await leftSideMenu.clickMenu();
+        await leftSideMenu.clickLogin();
         //assert
         await expect(
             $('//*[@text="Select a username and password from the list below, or click on the usernames to automatically populate the username and password."]'))
@@ -14,12 +18,12 @@ describe('My Login application', () => {
     });
 
     it('should failed to login with invalid credentials', async () => {
-        LoginScreen.Login('boba@example.com', '10202303030');
-        await expect(LoginScreen.errorMessage).toBeDisplayed();
+        await leftSideMenu.userLogin('boba@example.com', '10202303030');
+        await expect(loginPage.errorMessage).toBeDisplayed();
     });
 
     it('should login with valid credentials', async () => {
-        LoginScreen.Login('bob@example.com', '10203040');
-        await expect(CatalogScreen.productsHeader).toBeDisplayed();
+        await leftSideMenu.userLogin('bob@example.com', '10203040');
+        await expect(mainPage.productsHeader).toBeDisplayed();
     });
 });

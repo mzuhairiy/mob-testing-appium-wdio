@@ -1,13 +1,15 @@
-/**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
-class LeftSideMenuScreen {
-    get expandMenuButton() {
-        return $('~open menu');
-    }
+import MainPage from "./main.page.js";
+
+export default class LeftSideMenuPage extends MainPage {
     get loginButton() {
         return $('~menu item log in');
     }
+
+    async clickMenu(){
+        (await this.leftSideButton).click();
+    }
+
+    async clickLogin(){
+        (await this.loginButton).click();
+    }
 }
-export default new LeftSideMenuScreen();
