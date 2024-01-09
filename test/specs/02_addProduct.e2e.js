@@ -1,11 +1,9 @@
 import { expect, $} from '@wdio/globals'
-import LeftSideMenuPage from "../pageobjects/leftsideMenu.page.js";
 import LoginPage from "../pageobjects/login.page.js";
 import MainPage from "../pageobjects/main.page.js";
 import ProductPage from '../pageobjects/product.page.js';
 
 describe('Add a Product', () => {
-    const leftSideMenu = new LeftSideMenuPage;
     const loginPage = new LoginPage;
     const mainPage = new MainPage;
     const productPage = new ProductPage;
